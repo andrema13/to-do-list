@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import uuid from 'react-uuid';
+import { v4 as uuidv4 } from 'uuid';
 
 function TodoForm({addTodo}){
     const [todo, setTodoState] = useState({
@@ -18,14 +18,14 @@ function TodoForm({addTodo}){
         e.preventDefault();
         /** trim -> Removes the leading and trailing white space and line terminator characters from a string. */
         if(todo.task.trim()){
-            addTodo({...todo, id: uuid()});
+            addTodo({...todo, id: uuidv4()});
             //reset task input
             setTodoState({...todo, task: ""});
         }
     }
 
     return (
-        <form>
+        <form onSubmit={handleSubmit}>
             <input
                 name="task"
                 type="text"

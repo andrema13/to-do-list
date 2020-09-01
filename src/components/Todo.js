@@ -1,17 +1,17 @@
-import React, {useState} from "react";
+import React from "react";
 
 
 function Todo({todo}) {
 
     return (
         <div style={{display: "flex"}}>
-            <input type="checkbox"/>
+
             <li style={
                 {
-                    color: "white",
-                    textDecoration: todo.completed ? "line-through": null
+                    color: "white"
                 }
             }>{todo.task}</li>
+            <input type="checkbox"/>
             <button>Delete</button>
         </div>
 
