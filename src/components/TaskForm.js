@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-function TodoForm({addTodo}){
+function TaskForm({addTodo}){
     const [todo, setTodoState] = useState({
         id: "",
         task:"",
+        isChecked: false,
         isCompleted: false
     });
 
@@ -37,4 +38,4 @@ function TodoForm({addTodo}){
     );
 }
 
-export default TodoForm;
+export default TaskForm;
