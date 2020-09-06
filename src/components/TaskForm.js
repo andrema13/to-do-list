@@ -1,37 +1,54 @@
 import React, {useState} from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import {v4 as uuidv4} from 'uuid';
 import {Button, SvgIcon} from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import './TaskForm.css'
 import InputBase from "@material-ui/core/InputBase";
 
-function TaskForm({addTodo}){
+/**
+ *  A function that is responsible to create a form that contains the submit button
+ *  and the text area where the user can input the to-do to the list of todos
+ * @param addTodo
+ * @returns {JSX.Element}
+ * @constructor
+ */
+function TaskForm({addTodo}) {
+    /**
+     * An array of todos with the initial state defined
+     */
     const [todo, setTodoState] = useState({
         id: "",
-        task:"",
+        task: "",
         isChecked: false,
         isCompleted: false
     });
 
-    //update the task on our to-do object
-    function handleTaskInputChange(e){
-        setTodoState({...todo, task: e.target.value})
+    /**
+     * Updates the task defined by the user to the todo object
+     * @param task to the updated
+     */
+    function handleTaskInputChange(task) {
+        setTodoState({...todo, task: task.target.value})
     }
 
-    function handleSubmit(e){
-        //prevent default browser form submit functionality
-        e.preventDefault();
+    /**
+     * A function responsible to submit the tasks written by the user and clean tha input text area
+     * @param userInput
+     */
+    function handleSubmitTaskInput(userInput) {
+        /*prevent default browser form submit functionality*/
+        userInput.preventDefault();
         /** trim -> Removes the leading and trailing white space and line terminator characters from a string. */
-        if(todo.task.trim()){
+        if (todo.task.trim()) {
             addTodo({...todo, id: uuidv4()});
-            //reset task input
+            /*reset task input*/
             setTodoState({...todo, task: ""});
         }
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmitTaskInput}>
             <Grid
                 className={"TaskGrid"}
                 container spacing={1} alignItems="flex-end">
@@ -48,15 +65,13 @@ function TaskForm({addTodo}){
                         className={"InputTask"}
                         name="task"
                         type="text"
-                        inputProps={{ 'aria-label': 'naked' }}
+                        inputProps={{'aria-label': 'naked'}}
                         placeholder="What needs to be done?"
-                        value = {todo.task}
+                        value={todo.task}
                         /*will do action on everytime the input changes*/
                         onChange={handleTaskInputChange}/>
                 </Grid>
             </Grid>
-
-
         </form>
     );
 }
