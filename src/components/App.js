@@ -8,6 +8,7 @@ import Box from '@material-ui/core/Box';
 import {makeStyles} from '@material-ui/core/styles';
 import ListItem from '@material-ui/core/ListItem';
 import List from "@material-ui/core/List";
+import { v4 as uuidv4 } from 'uuid';
 
 /**
  * Local to store the values of the to-do list
@@ -154,7 +155,7 @@ function App() {
     return (
         <div className="App">
             <div className="App-header">
-                <h1>To-Do List</h1>
+                <h1>Todos</h1>
                 <CssBaseline/>
                 <Box
                     className={"AppBox"}
@@ -167,7 +168,7 @@ function App() {
                             {
                                 todoList.map((value) => {
                                     return (
-                                        <ListItem key={value} role={undefined} dense button>
+                                        <ListItem key={uuidv4()} role={undefined} dense button>
                                             {value}
                                         </ListItem>
                                     )

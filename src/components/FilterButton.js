@@ -31,7 +31,6 @@ function FilterButton(props) {
     return (
         <ButtonGroup size="small" aria-label="small outlined button group">
             <Button
-                color={"red"}
                 id={uuidv4()}
                 variant={props.isPressed ? "outlined" : "text"}
                 className={classes.root}
