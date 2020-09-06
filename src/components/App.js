@@ -1,17 +1,17 @@
 import React, {useEffect, useState} from 'react';
-//import logo from './logo.svg';
 import './App.css';
-import Todo from "./components/Todo";
-import TaskForm from "./components/TaskForm";
-import FilterButton from "./components/FilterButton";
+import Todo from "./Todo";
+import TaskForm from "./TaskForm";
+import FilterButton from "./FilterButton";
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Box from '@material-ui/core/Box';
+import {makeStyles} from '@material-ui/core/styles';
+import ListItem from '@material-ui/core/ListItem';
+import List from "@material-ui/core/List";
 
 //Local to store the values of the to-do list
 const LOCAL_STORAGE_KEY = "to-do-list"
 
-/* Defining these constants outside our App() function because
-if they were defined inside it, they would be recalculated every time the App
-component re-renders, and i don’t want that.
-This information will never change no matter what the application does.*/
 const FILTER_MAP = {
     All: () => true,
     Active: task => !task.isCompleted,
@@ -19,10 +19,21 @@ const FILTER_MAP = {
 };
 const FILTER_TODOS = Object.keys(FILTER_MAP);
 
+const useStyles = makeStyles((theme) => ({
+    root: {
+        position: 'relative',
+        height: 250,
+        whiteSpace: 'nowrap',
+        overflow: 'auto',
+        margin: 4.5
+    }
+}));
+
 function App() {
 
     const [todos, setTodo] = useState([]);
     const [filter, setFilter] = useState('All');
+    const classes = useStyles();
 
     const taskList = todos
         .filter(FILTER_MAP[filter])
@@ -81,36 +92,41 @@ function App() {
     }
 
     function getTodosLeftCount(todos) {
-        return todos.filter(todo => !todo.isCompleted).length + " Items Left";
+        return todos.filter(todo => !todo.isCompleted).length + " items left";
     }
 
     return (
         <div className="App">
-            <header className="App-header">
-                {/*<img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">Learn React
-        </a>*/}
-                <div>
-                    <div>{getTodosLeftCount(todos)}</div>
-                </div>
-                <div>
-                    <h1>To-Do List</h1>
-                    <TaskForm addTodo={addTodo}/>
-                    <div
-                        role="list"
-                        className="todo-list stack-large stack-exception"
-                        aria-labelledby="list-heading"
-                    >{taskList}
+            <div className="App-header">
+                <h1>To-Do List</h1>
+                <CssBaseline/>
+                <Box
+                    className={"AppBox"}
+                    display={"flex"}
+                    p={1.5}
+                    bgcolor="whitesmoke">
+                    <div>
+                        <TaskForm addTodo={addTodo}/>
+                        <List className={classes.root}>
+                            {
+                                taskList.map((value) => {
+                                    return (
+                                        <ListItem key={value} role={undefined} dense button>
+                                            {value}
+                                        </ListItem>
+                                    )
+                                })
+                            }
+                        </List>
+                        <div className="FilterButtons">
+                            <div
+                                className={"NumberOfTodos"}>{getTodosLeftCount(todos)}</div>
+                            <div>{filterList}</div>
+                        </div>
                     </div>
-
-                    <div className="filters btn-group stack-exception">
-                        {filterList}
-                    </div>
-                </div>
-            </header>
+                </Box>
+                <footer className={"App-footer"}/>
+            </div>
         </div>
     );
 }

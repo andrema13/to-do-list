@@ -1,5 +1,10 @@
 import React, {useState} from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import {Button, SvgIcon} from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import './TaskForm.css'
+import InputBase from "@material-ui/core/InputBase";
 
 function TaskForm({addTodo}){
     const [todo, setTodoState] = useState({
@@ -27,13 +32,31 @@ function TaskForm({addTodo}){
 
     return (
         <form onSubmit={handleSubmit}>
-            <input
-                name="task"
-                type="text"
-                value = {todo.task}
-                /*will do action on everytime the input changes*/
-                onChange={handleTaskInputChange}/>
-            <button type="submit">Submit</button>
+            <Grid
+                className={"TaskGrid"}
+                container spacing={1} alignItems="flex-end">
+                <Grid item>
+                    <Button
+                        className={"SubmitButton"}
+                        type="submit"
+                        size="small">
+                        <SvgIcon component={ExpandMoreIcon}/>
+                    </Button>
+                </Grid>
+                <Grid item>
+                    <InputBase
+                        className={"InputTask"}
+                        name="task"
+                        type="text"
+                        inputProps={{ 'aria-label': 'naked' }}
+                        placeholder="What needs to be done?"
+                        value = {todo.task}
+                        /*will do action on everytime the input changes*/
+                        onChange={handleTaskInputChange}/>
+                </Grid>
+            </Grid>
+
+
         </form>
     );
 }

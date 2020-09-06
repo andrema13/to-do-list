@@ -1,0 +1,20 @@
+p {
+    width: 235px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.TaskList {
+    display: flex;
+    border-bottom: 0.05em solid #282c34;
+}
+
+.Task {
+    color: #282c34;
+    text-overflow: ellipsis;
+    font-size: smaller;
+}
+
+.DeleteButton{
+    margin-left: auto;
+}
+
