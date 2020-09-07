@@ -1,11 +1,3 @@
-.TaskGrid{
-    border-bottom: 0.1em solid #282c34;
-}
-
-.SubmitButton {
-    size: 30px;
-}
-
-.InputTask {
-    width: border-box;
+.input-task {
+    width: 100%;
 }

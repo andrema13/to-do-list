@@ -4,11 +4,11 @@ import Todo from "./Todo";
 import TaskForm from "./TaskForm";
 import FilterButton from "./FilterButton";
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Box from '@material-ui/core/Box';
 import {makeStyles} from '@material-ui/core/styles';
 import ListItem from '@material-ui/core/ListItem';
 import List from "@material-ui/core/List";
-import { v4 as uuidv4 } from 'uuid';
+import {Paper} from '@material-ui/core';
+import {v4 as UUID} from 'uuid';
 
 /**
  * Local to store the values of the to-do list
@@ -36,10 +36,10 @@ const FILTER_TODOS = Object.keys(FILTER_MAP);
 const useStyles = makeStyles((theme) => ({
     root: {
         position: 'relative',
-        height: 250,
         whiteSpace: 'nowrap',
         overflow: 'auto',
-        margin: 4.5
+        margin: 4.5,
+        width: "inherit !important"
     }
 }));
 
@@ -153,38 +153,38 @@ function App() {
     }
 
     return (
-        <div className="App">
-            <div className="App-header">
-                <h1>Todos</h1>
-                <CssBaseline/>
-                <Box
-                    className={"AppBox"}
-                    display={"flex"}
-                    p={1.5}
-                    bgcolor="whitesmoke">
-                    <div>
-                        <TaskForm addTodo={addTodo}/>
-                        <List className={classes.root}>
-                            {
-                                todoList.map((value) => {
-                                    return (
-                                        <ListItem key={uuidv4()} role={undefined} dense button>
-                                            {value}
-                                        </ListItem>
-                                    )
-                                })
-                            }
-                        </List>
-                        <div className="FilterButtons">
-                            <div
-                                className={"NumberOfTodos"}>{getTodosLeftCount(todos)}</div>
-                            <div>{filterList}</div>
-                        </div>
-                    </div>
-                </Box>
-                <footer className={"App-footer"}/>
-            </div>
+        <div className="container">
+            <h1 className={"title"}>todos</h1>
+            <CssBaseline/>
+            <Paper
+                elevation={4}
+                style={{
+                    marginBottom: "8px"
+                }}
+                bgcolor="whitesmoke">
+                <TaskForm addTodo={addTodo}/>
+            </Paper>
+            <Paper
+                elevation={4}
+                bgcolor="whitesmoke">
+                <List className={classes.root}>
+                    {
+                        todoList.map((value) => {
+                            return (
+                                <ListItem key={UUID()} role={undefined} dense button>
+                                    {value}
+                                </ListItem>
+                            )
+                        })
+                    }
+                </List>
+                <div className={"bottom-container"}>
+                    <div>{getTodosLeftCount(todos)}</div>
+                    <div className={"bottom-child"}>{filterList}</div>
+                </div>
+            </Paper>
         </div>
+
     );
 }
 

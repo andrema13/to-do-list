@@ -1,20 +1,16 @@
 p {
-    width: 235px;
+    width: 100%;
     white-space: nowrap;
     overflow: hidden;
 }
-.TaskList {
-    display: flex;
-    border-bottom: 0.05em solid #282c34;
+
+ul {
+    width: 100%;
 }
 
-.Task {
+.task {
     color: #282c34;
     text-overflow: ellipsis;
-    font-size: smaller;
-}
-
-.DeleteButton{
-    margin-left: auto;
+    font-size: medium;
 }
 

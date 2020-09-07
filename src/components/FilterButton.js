@@ -1,8 +1,9 @@
 import React from "react";
 import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import {ButtonGroup} from "@material-ui/core";
-import { v4 as uuidv4 } from 'uuid';
+import {v4 as UUID} from 'uuid';
+
 /**
  * Style to apply to the filter buttons
  * @type {(props?: any) => ClassNameMap<"root">}
@@ -29,18 +30,17 @@ function FilterButton(props) {
     const classes = useStyles();
 
     return (
-        <ButtonGroup size="small" aria-label="small outlined button group">
+        <ButtonGroup size="small">
             <Button
-                id={uuidv4()}
+                id={UUID()}
                 variant={props.isPressed ? "outlined" : "text"}
                 className={classes.root}
                 aria-pressed={props.isPressed}
-                onClick={
-                    () => {
-                        props.setFilter(props.name)
-                    }
-                }
-            >{props.name}
+                onClick={() => {
+                    props.setFilter(props.name)
+                }}
+            >
+                {props.name}
             </Button>
         </ButtonGroup>
     );

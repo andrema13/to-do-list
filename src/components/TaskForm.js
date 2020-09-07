@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {v4 as uuidv4} from 'uuid';
+import {v4 as UUID} from 'uuid';
 import {Button, SvgIcon} from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -41,7 +41,7 @@ function TaskForm({addTodo}) {
         userInput.preventDefault();
         /** trim -> Removes the leading and trailing white space and line terminator characters from a string. */
         if (todo.task.trim()) {
-            addTodo({...todo, id: uuidv4()});
+            addTodo({...todo, id: UUID()});
             /*reset task input*/
             setTodoState({...todo, task: ""});
         }
@@ -50,19 +50,22 @@ function TaskForm({addTodo}) {
     return (
         <form onSubmit={handleSubmitTaskInput}>
             <Grid
-                className={"TaskGrid"}
-                container spacing={1} alignItems="flex-end">
+                container
+                spacing={1}
+                alignItems="flex-end"
+            >
                 <Grid item>
                     <Button
-                        className={"SubmitButton"}
                         type="submit"
                         size="small">
-                        <SvgIcon component={ExpandMoreIcon}/>
+                        <SvgIcon
+                            component={ExpandMoreIcon}/>
                     </Button>
                 </Grid>
-                <Grid item>
+                <Grid item
+                      style={{width: "calc(100% - 72px)"}}>
                     <InputBase
-                        className={"InputTask"}
+                        className={"input-task"}
                         name="task"
                         type="text"
                         inputProps={{'aria-label': 'naked'}}
